@@ -12,6 +12,9 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains:annotations:24.1.0")
+    implementation("io.vavr:vavr:0.10.4")
+
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("com.oneeyedmen:okeydoke:2.0.3")
@@ -27,14 +30,20 @@ java {
     }
 }
 
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("--enable-preview")
+}
+
 spotless {
     java {
+        toggleOffOn()
         googleJavaFormat()
     }
 }
 
 tasks.test {
     useJUnitPlatform()
+    jvmArgs("--enable-preview")
 }
 
 tasks.withType<JavaCompile> {

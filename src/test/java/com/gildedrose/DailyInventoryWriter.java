@@ -2,10 +2,10 @@ package com.gildedrose;
 
 import static java.util.Objects.requireNonNull;
 
+import com.gildedrose.legacy.Item;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.io.Writer;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class DailyInventoryWriter {
@@ -18,7 +18,7 @@ public final class DailyInventoryWriter {
     this.writer = requireNonNull(writer, "writer must not be null");
   }
 
-  public void apply(List<Item> items) {
+  public void apply(Item[] items) {
     try {
       writer.write("-------- day %d --------\n".formatted(index.getAndIncrement()));
       writer.append("name, sellIn, quality\n");
